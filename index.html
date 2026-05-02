@@ -675,6 +675,22 @@ footer { background:var(--navy-dark); color:#fff; padding:56px 32px 24px; }
 .hero-visual img { opacity: 1 !important; }
 
 </style>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ─────────────────────────────────────────────────────────────
+    // EMAILJS SETUP — Replace these 3 values with your own:
+    //   1. Go to https://www.emailjs.com  →  Sign Up (free)
+    //   2. Add an Email Service (Gmail / Outlook) → copy Service ID
+    //   3. Create an Email Template → copy Template ID
+    //   4. Go to Account → copy Public Key
+    // ─────────────────────────────────────────────────────────────
+    const EJS_PUBLIC_KEY  = 'r0QpYdVI0Ee-1MmkY';   // e.g. 'abc123XYZ'
+    const EJS_SERVICE_ID  = 'service_kld5mck';   // e.g. 'service_xxxxxxx'
+    const EJS_TEMPLATE_ID = 'template_w1zmd6u';  // e.g. 'template_xxxxxxx'
+
+    emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+  </script>
 </head>
 <body>
 
@@ -1231,14 +1247,62 @@ function calcEMI(){
 calcEMI();
 
 function submitEnquiry(){
-  const name=document.getElementById('f-name').value.trim();
-  const phone=document.getElementById('f-phone').value.trim();
-  const ltype=document.getElementById('f-loantype').value;
-  if(!name){toast('Please enter your name.');return;}
-  if(!phone||!/^\d{10}$/.test(phone)){toast('Please enter a valid 10-digit mobile number.');return;}
-  if(!ltype){toast('Please select a loan type.');return;}
-  document.getElementById('success-msg').style.display='block';
-  toast('✅ Enquiry submitted successfully!');
+  const name   = document.getElementById('f-name').value.trim();
+  const phone  = document.getElementById('f-phone').value.trim();
+  const email  = document.getElementById('f-email').value.trim();
+  const city   = document.getElementById('f-city').value.trim();
+  const ltype  = document.getElementById('f-loantype').value;
+  const lamt   = document.getElementById('f-loanamt').value;
+  const emp    = document.getElementById('f-emp').value;
+  const income = document.getElementById('f-income').value;
+  const msg    = document.getElementById('f-msg').value.trim();
+
+  // Validation
+  if(!name)  { toast('Please enter your name.'); return; }
+  if(!phone || !/^\d{10}$/.test(phone)) { toast('Please enter a valid 10-digit mobile number.'); return; }
+  if(!ltype) { toast('Please select a loan type.'); return; }
+
+  const btn = document.querySelector('.form-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  // Get current date & time in IST
+  const now = new Date();
+  const submittedAt = now.toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    day:'2-digit', month:'short', year:'numeric',
+    hour:'2-digit', minute:'2-digit', hour12:true
+  });
+
+  const templateParams = {
+    from_name     : name,
+    phone         : phone,
+    email         : email || 'Not provided',
+    city          : city  || 'Not provided',
+    loan_type     : ltype,
+    loan_amount   : lamt   || 'Not selected',
+    employment    : emp    || 'Not selected',
+    income        : income || 'Not selected',
+    message       : msg    || 'None',
+    submitted_at  : submittedAt
+  };
+
+  emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, templateParams)
+    .then(() => {
+      document.getElementById('success-msg').style.display = 'block';
+      toast('✅ Enquiry submitted successfully!');
+      btn.textContent = 'Submit Enquiry →';
+      btn.disabled = false;
+      // Clear form
+      ['f-name','f-phone','f-email','f-city','f-msg'].forEach(id => document.getElementById(id).value='');
+      ['f-loantype','f-loanamt','f-emp','f-income'].forEach(id => document.getElementById(id).selectedIndex=0);
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      toast('❌ Failed to send. Please call us directly.');
+      btn.textContent = 'Submit Enquiry →';
+      btn.disabled = false;
+    });
 }
 
 function toast(msg){
