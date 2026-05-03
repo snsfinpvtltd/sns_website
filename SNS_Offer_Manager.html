@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNS Offer Manager</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; min-height: 100vh; }
+
+  .header {
+    background: linear-gradient(135deg, #1a1050, #1a5228);
+    color: #fff;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header h1 { font-size: 20px; font-weight: 800; }
+  .header p  { font-size: 13px; opacity: 0.7; margin-top: 2px; }
+  .badge { background: #5be07a; color: #1a1050; font-size: 10px; font-weight: 800;
+           padding: 3px 10px; border-radius: 20px; letter-spacing: 1px; }
+
+  .container { max-width: 820px; margin: 32px auto; padding: 0 20px 60px; }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 18px rgba(26,16,80,0.08);
+  }
+  .card h2 { font-size: 16px; color: #1a1050; margin-bottom: 6px; font-weight: 800; }
+  .card p  { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 18px; }
+
+  /* Step badges */
+  .step { display:flex; align-items:flex-start; gap:14px; margin-bottom:20px; }
+  .step-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: #1a1050; color: #5be07a;
+    border-radius: 50%;
+    font-weight: 800; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-body h3 { font-size: 14px; color: #1a1050; font-weight: 700; margin-bottom: 4px; }
+  .step-body p  { font-size: 13px; color: #555; margin: 0; }
+
+  /* File picker */
+  .pick-zone {
+    border: 2px dashed #b0c4b0;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fcf8;
+    margin-bottom: 18px;
+  }
+  .pick-zone:hover { border-color: #1a5228; background: #f0faf2; }
+  .pick-zone .icon { font-size: 36px; margin-bottom: 10px; }
+  .pick-zone h3 { font-size: 15px; color: #1a1050; font-weight: 700; margin-bottom: 6px; }
+  .pick-zone p  { font-size: 13px; color: #888; margin: 0; }
+  #html-file-input { display: none; }
+
+  /* Offer list */
+  #offer-list { list-style: none; margin-bottom: 18px; }
+  #offer-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #f7f9ff;
+    border: 1px solid #e0e8ff;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #1a1050;
+    font-weight: 600;
+  }
+  #offer-list li .drag-handle { cursor: grab; color: #aaa; font-size: 18px; }
+  #offer-list li .fname { flex: 1; }
+  #offer-list li .remove-btn {
+    background: #fff0f0; border: 1px solid #ffb0b0;
+    color: #cc3333; font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 6px; cursor: pointer;
+  }
+  #offer-list li .remove-btn:hover { background: #ffdddd; }
+  #offer-list li .move-btn {
+    background: #f0f4ff; border: 1px solid #c0ccee;
+    color: #1a1050; font-size: 13px; font-weight: 700;
+    padding: 4px 8px; border-radius: 6px; cursor: pointer;
+  }
+  #offer-list li .move-btn:hover { background: #dde4ff; }
+
+  .add-row { display: flex; gap: 10px; margin-bottom: 6px; }
+  #new-filename {
+    flex: 1; padding: 10px 14px; border: 1.5px solid #c0cce0;
+    border-radius: 10px; font-size: 14px; color: #1a1050;
+    outline: none;
+  }
+  #new-filename:focus { border-color: #1a5228; }
+  .btn {
+    padding: 10px 22px; border-radius: 10px; border: none;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s;
+  }
+  .btn-green  { background: #1a5228; color: #fff; }
+  .btn-green:hover  { background: #1e6830; }
+  .btn-navy   { background: #1a1050; color: #fff; }
+  .btn-navy:hover   { background: #2a1f70; }
+  .btn-outline { background: #fff; color: #1a1050; border: 2px solid #1a1050; }
+
+  /* Output */
+  #output-section { display: none; }
+  #output-section.visible { display: block; }
+  #output-code {
+    background: #1a1050; color: #7ee89a;
+    padding: 20px; border-radius: 10px;
+    font-family: monospace; font-size: 13px;
+    white-space: pre; overflow-x: auto;
+    margin-bottom: 16px;
+  }
+  .dl-btn {
+    display: inline-block;
+    background: linear-gradient(135deg,#1a1050,#1a5228);
+    color: #fff; font-size: 15px; font-weight: 800;
+    padding: 14px 36px; border-radius: 50px;
+    text-decoration: none; cursor: pointer;
+    border: none; width: 100%; text-align: center;
+    box-shadow: 0 4px 18px rgba(26,16,80,0.25);
+    transition: 0.2s;
+  }
+  .dl-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  .tip {
+    background: #fffbe6; border-left: 4px solid #f5c518;
+    border-radius: 0 10px 10px 0; padding: 12px 16px;
+    font-size: 13px; color: #555; margin-top: 12px;
+  }
+  .tip strong { color: #1a1050; }
+
+  .empty-msg { text-align:center; color:#aaa; font-size:14px; padding:20px; }
+  .success-badge {
+    display:inline-block; background:#e8f5ea; color:#1a5228;
+    border:1px solid #a3d9ad; padding:4px 14px; border-radius:20px;
+    font-size:12px; font-weight:700; margin-left:10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>🏦 SNS Offer Manager <span class="badge">TEAM TOOL</span></h1>
+    <p>Add, remove and reorder bank offer images — no coding required</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HOW IT WORKS -->
+  <div class="card">
+    <h2>How to use this tool</h2>
+    <p>Follow these 3 steps every time you receive a new bank offer image.</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Load the website HTML file</h3>
+        <p>Click the area below and select <strong>sns_website_final_9.html</strong> from your computer.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Add / Remove offer filenames</h3>
+        <p>Type the image filename (e.g. <strong>hdfc_offer.jpeg</strong>) and click Add. Remove any old offers.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Download & upload the updated HTML</h3>
+        <p>Click Download — then upload the new HTML file and the image to your server. Done!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Load HTML -->
+  <div class="card">
+    <h2>Step 1 — Load Website File</h2>
+    <p>Select your <strong>sns_website_final_9.html</strong> file.</p>
+    <div class="pick-zone" onclick="document.getElementById('html-file-input').click()">
+      <div class="icon">📂</div>
+      <h3 id="pick-label">Click to select sns_website_final_9.html</h3>
+      <p>Only the offer list inside the file will be modified</p>
+    </div>
+    <input type="file" id="html-file-input" accept=".html">
+  </div>
+
+  <!-- STEP 2: Manage offers -->
+  <div class="card" id="manage-card" style="display:none">
+    <h2>Step 2 — Manage Offer Images <span class="success-badge" id="file-loaded-badge"></span></h2>
+    <p>Current offers shown on the website. Add new ones or remove old ones.</p>
+
+    <ul id="offer-list"></ul>
+    <div id="empty-msg" class="empty-msg" style="display:none">No offers yet. Add one below.</div>
+
+    <div class="add-row">
+      <input type="text" id="new-filename" placeholder="e.g. hdfc_home_loan.jpeg" />
+      <button class="btn btn-green" onclick="addOffer()">＋ Add</button>
+    </div>
+    <div class="tip">
+      <strong>⚠️ Important:</strong> Type only the filename — do NOT add the extension manually if the file already has one.
+      The file in <strong>bank-offers/</strong> folder must have the exact same name.
+      Example: if file is <strong>kotak_offer.jpeg</strong>, type <strong>kotak_offer.jpeg</strong> — not kotak_offer.jpeg.jpeg
+    </div>
+  </div>
+
+  <!-- STEP 3: Download -->
+  <div class="card" id="output-section">
+    <h2>Step 3 — Download Updated Website File</h2>
+    <p>Your updated offer list is ready. Download the file and upload it to your server along with the new image.</p>
+    <div id="output-code"></div>
+    <button class="dl-btn" onclick="downloadHTML()">⬇️ Download Updated HTML File</button>
+    <div class="tip" style="margin-top:16px">
+      <strong>After downloading:</strong> Upload <strong>sns_website_final_9.html</strong>
+      to your server — it replaces the old one. Also upload the new image into
+      <strong>bank-offers/</strong> folder.
+    </div>
+  </div>
+
+</div>
+
+<script>
+var htmlContent = '';
+var originalFilename = 'sns_website_final_9.html';
+var offerList = [];
+
+// ── Load HTML file ────────────────────────────────────────────
+document.getElementById('html-file-input').addEventListener('change', function(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  originalFilename = file.name;
+
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    htmlContent = ev.target.result;
+
+    // Extract current BANK_OFFERS list from HTML
+    var match = htmlContent.match(/var BANK_OFFERS\s*=\s*\[([\s\S]*?)\];/);
+    if (match) {
+      var raw = match[1];
+      offerList = [];
+      var items = raw.match(/"([^"]+)"/g);
+      if (items) {
+        items.forEach(function(item) {
+          offerList.push(item.replace(/"/g, ''));
+        });
+      }
+      document.getElementById('pick-label').textContent = '✅ Loaded: ' + file.name;
+      document.getElementById('file-loaded-badge').textContent = offerList.length + ' offers loaded';
+      document.getElementById('manage-card').style.display = 'block';
+      renderList();
+      updateOutput();
+    } else {
+      alert('Could not find BANK_OFFERS in this file.\nMake sure you selected the correct SNS website HTML file.');
+    }
+  };
+  reader.readAsText(file);
+});
+
+// ── Render offer list ─────────────────────────────────────────
+function renderList() {
+  var ul = document.getElementById('offer-list');
+  ul.innerHTML = '';
+  document.getElementById('empty-msg').style.display = offerList.length === 0 ? 'block' : 'none';
+
+  offerList.forEach(function(fname, i) {
+    var li = document.createElement('li');
+    li.innerHTML =
+      '<span class="drag-handle">⠿</span>' +
+      '<span class="fname">📄 ' + fname + '</span>' +
+      (i > 0 ? '<button class="move-btn" onclick="moveUp(' + i + ')">▲</button>' : '') +
+      (i < offerList.length-1 ? '<button class="move-btn" onclick="moveDown(' + i + ')">▼</button>' : '') +
+      '<button class="remove-btn" onclick="removeOffer(' + i + ')">✕ Remove</button>';
+    ul.appendChild(li);
+  });
+  updateOutput();
+}
+
+// ── Add offer ─────────────────────────────────────────────────
+function addOffer() {
+  var input = document.getElementById('new-filename');
+  var val = input.value.trim();
+  if (!val) { alert('Please enter a filename.'); return; }
+
+  // Auto-fix double extensions e.g. kotak.jpeg.jpeg → kotak.jpeg
+  val = val.replace(/(\.jpe?g|\.png|\.webp|\.gif)(\1)+$/i, '$1');
+  // Also fix mixed like name.jpeg.jpg
+  val = val.replace(/(\.jpe?g|\.png|\.webp|\.gif)(\.jpe?g|\.png|\.webp|\.gif)+$/i, '$1');
+
+  if (!/\.(jpe?g|png|webp|gif)$/i.test(val)) {
+    alert('Filename must end with .jpeg, .jpg, .png or .webp\nExample: hdfc_offer.jpeg');
+    return;
+  }
+
+  // Show warning if we auto-fixed
+  if (val !== input.value.trim()) {
+    alert('⚠️ Filename corrected to: ' + val + '\n\nMake sure the image file in bank-offers/ folder is also named: ' + val);
+  }
+
+  if (offerList.indexOf(val) !== -1) {
+    alert(val + ' is already in the list.'); return;
+  }
+  offerList.push(val);
+  input.value = '';
+  renderList();
+}
+
+// Allow Enter key to add
+document.getElementById('new-filename').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') addOffer();
+});
+
+// ── Remove offer ──────────────────────────────────────────────
+function removeOffer(i) {
+  if (!confirm('Remove "' + offerList[i] + '" from the offers?')) return;
+  offerList.splice(i, 1);
+  renderList();
+}
+
+// ── Move up / down ────────────────────────────────────────────
+function moveUp(i) {
+  var tmp = offerList[i-1]; offerList[i-1] = offerList[i]; offerList[i] = tmp;
+  renderList();
+}
+function moveDown(i) {
+  var tmp = offerList[i+1]; offerList[i+1] = offerList[i]; offerList[i] = tmp;
+  renderList();
+}
+
+// ── Update output preview ─────────────────────────────────────
+function updateOutput() {
+  var lines = offerList.map(function(f) { return '  "' + f + '"'; }).join(',\n');
+  var code = 'var BANK_OFFERS = [\n' + lines + (lines ? '\n' : '') + '];';
+  document.getElementById('output-code').textContent = code;
+  document.getElementById('output-section').classList.add('visible');
+}
+
+// ── Download updated HTML ─────────────────────────────────────
+function downloadHTML() {
+  if (!htmlContent) { alert('Please load the HTML file first (Step 1).'); return; }
+
+  var lines = offerList.map(function(f) { return '  "' + f + '"'; }).join(',\n');
+  var newList = 'var BANK_OFFERS = [\n' + lines + (lines ? '\n' : '') + '];';
+
+  var updated = htmlContent.replace(/var BANK_OFFERS\s*=\s*\[([\s\S]*?)\];/, newList);
+
+  var blob = new Blob([updated], { type: 'text/html' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = originalFilename;
+  a.click();
+}
+</script>
+</body>
+</html>
