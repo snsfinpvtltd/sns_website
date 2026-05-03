@@ -74,7 +74,7 @@
   .brand-bottom {
     flex-shrink:0;
     background:#00003c;
-    padding:10px 20px 14px;
+    padding:10px 20px max(52px, calc(14px + env(safe-area-inset-bottom)));
     text-align:center;
   }
   .brand-bottom .tagline {
@@ -89,21 +89,21 @@
   .brand-bottom .apply-btn {
     display:inline-block; margin-top:9px;
     background:#1e5a1e; color:#fff;
-    font-size:13px; font-weight:800;
-    padding:7px 28px; border-radius:50px;
+    font-size:14px; font-weight:800;
+    padding:10px 32px; border-radius:50px;
     text-decoration:none; border:1.5px solid #4db84d;
     box-shadow:0 3px 14px rgba(30,90,30,0.45);
     transition:0.2s;
+    -webkit-tap-highlight-color:transparent;
   }
   .brand-bottom .apply-btn:hover { background:#256825; }
 
   /* ── Progress dots ── */
   .dots-bar {
-    position:fixed; bottom:0; left:0; right:0; z-index:20;
+    position:fixed; bottom:6px; left:0; right:0; z-index:20;
     display:flex; justify-content:center; gap:7px;
-    padding:8px 0 max(12px, env(safe-area-inset-bottom));
+    padding:0;
     pointer-events:none;
-    background:linear-gradient(to top, rgba(0,0,60,0.55) 0%, transparent 100%);
   }
   .dot {
     width:8px; height:8px; border-radius:50%;
