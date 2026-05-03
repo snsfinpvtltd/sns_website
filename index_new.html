@@ -1632,7 +1632,40 @@ function closeOfferLightbox(e) {
 }
 
 // Load offers on page ready
-document.addEventListener('DOMContentLoaded', buildOfferCards);
+document.addEventListener('DOMContentLoaded', function() {
+  buildOfferCards();
+
+  // Hash-based page routing e.g. index.html#enquiry
+  var hash = window.location.hash.replace('#','');
+  var validPages = ['home','about','services','team','emi','contact','enquiry'];
+  if (hash && validPages.indexOf(hash) !== -1) { showPage(hash); }
+
+  // Touch swipe for home page offer carousel
+  var track = document.getElementById('offers-track');
+  if (track) {
+    var tsx = 0, tsy = 0, tDragging = false;
+    track.addEventListener('touchstart', function(e) {
+      tsx = e.touches[0].clientX;
+      tsy = e.touches[0].clientY;
+      tDragging = true;
+    }, {passive: true});
+    track.addEventListener('touchend', function(e) {
+      if (!tDragging) return;
+      tDragging = false;
+      var dx = e.changedTouches[0].clientX - tsx;
+      var dy = e.changedTouches[0].clientY - tsy;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        offerNav(dx < 0 ? 1 : -1);
+      }
+    }, {passive: true});
+    track.addEventListener('touchmove', function(e) {
+      if (!tDragging) return;
+      var dx = e.touches[0].clientX - tsx;
+      var dy = e.touches[0].clientY - tsy;
+      if (Math.abs(dx) > Math.abs(dy)) { e.preventDefault(); }
+    }, {passive: false});
+  }
+});
 var offerResizeTimer;
 window.addEventListener('resize', function() {
   clearTimeout(offerResizeTimer);
