@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -696,6 +695,7 @@ footer { background:var(--navy-dark); color:#fff; padding:56px 32px 24px; }
   }
   .offer-card {
     flex: 0 0 calc((100% - 40px) / 3);
+    min-width: 220px;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 18px rgba(26,46,90,0.12);
@@ -714,9 +714,12 @@ footer { background:var(--navy-dark); color:#fff; padding:56px 32px 24px; }
   .offer-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(26,46,90,0.20); }
   .offer-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    object-position: top;
     display: block;
+    background: #f7f9ff;
   }
   .offer-card-label {
     padding: 12px 16px;
@@ -817,13 +820,9 @@ footer { background:var(--navy-dark); color:#fff; padding:56px 32px 24px; }
   .offer-lightbox-close:hover { transform: scale(1.2) rotate(90deg); }
 
   @media(max-width:700px){
-    .offer-card { flex: 0 0 calc((100% - 20px) / 2); }
-    .offer-card img { height: 150px; }
+    .offer-card img { max-height: 220px; }
     #offers-prev { left: -12px; }
     #offers-next { right: -12px; }
-  }
-  @media(max-width:480px){
-    .offer-card { flex: 0 0 85vw; }
   }
 
 </style>
@@ -1498,17 +1497,22 @@ function submitEnquiry(){
 // ===========================================================
 
 var BANK_OFFERS = [
-  "axis.jpeg",
-  "adi.jpeg",
-  "indus.jpeg",
-  "tata.jpeg",
-  "kotak_offer.jpeg"
+  "Aditya Birla Capital_offer.jpeg",
+  "Axis Bank_Offer.jpeg",
+  "Indus Bank_offer.jpeg",
+  "Kotak Bank_offer.jpeg",
+  "Tata Capital_offer.jpeg"
 ];
 
 // ── Carousel engine ─────────────────────────────────────────
-var OFFERS_VISIBLE = 3;   // cards shown at a time
-var offerPage      = 0;   // current page index
-var offerPages     = 0;   // total pages
+var offerPage  = 0;
+var offerPages = 0;
+
+function getOffersVisible() {
+  if (window.innerWidth < 600) return 1;
+  if (window.innerWidth < 900) return 2;
+  return 3;
+}
 
 function buildOfferCards() {
   var track = document.getElementById('offers-track');
@@ -1538,6 +1542,7 @@ function buildOfferCards() {
     track.appendChild(card);
   });
 
+  var OFFERS_VISIBLE = getOffersVisible();
   offerPages = Math.ceil(BANK_OFFERS.length / OFFERS_VISIBLE);
 
   // Show arrows + dots only when more than OFFERS_VISIBLE
@@ -1566,7 +1571,13 @@ function buildOfferCards() {
 function goOfferPage(page) {
   var track = document.getElementById('offers-track');
   if (!track) return;
+  var OFFERS_VISIBLE = getOffersVisible();
+  offerPages = Math.ceil(BANK_OFFERS.length / OFFERS_VISIBLE);
   offerPage = Math.max(0, Math.min(page, offerPages - 1));
+
+  // Update card widths for current screen size
+  var gap = (OFFERS_VISIBLE - 1) * 20;
+  var flexVal = '0 0 calc((100% - ' + gap + 'px) / ' + OFFERS_VISIBLE + ')';
 
   // Which cards are visible on this page?
   var start = offerPage * OFFERS_VISIBLE;
@@ -1574,6 +1585,7 @@ function goOfferPage(page) {
   var cards = track.querySelectorAll('.offer-card');
 
   cards.forEach(function(card, i) {
+    card.style.flex = flexVal;
     if (i >= start && i < end) {
       card.style.display = '';
       // Staggered entry animation
@@ -1621,6 +1633,11 @@ function closeOfferLightbox(e) {
 
 // Load offers on page ready
 document.addEventListener('DOMContentLoaded', buildOfferCards);
+var offerResizeTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(offerResizeTimer);
+  offerResizeTimer = setTimeout(function() { buildOfferCards(); }, 200);
+});
 
 function toast(msg){
   const t=document.getElementById('toast');
