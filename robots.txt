@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Block utility / admin pages
+Disallow: /SNS_Offer_Manager.html
+Disallow: /sns_wa_status.html
+
+# Sitemap location
+Sitemap: https://www.snsfinserv.in/sitemap.xml
+
+# Crawl delay (optional, conservative)
+Crawl-delay: 5
