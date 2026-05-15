@@ -3,170 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- ─── WhatsApp / OG Meta Tags ─────────────────────────────────────────── -->
-<!-- WhatsApp scrapes these. Use a portrait image (1080x1920 or 1:1 square). -->
-<!-- Replace og:image URL with your actual hosted portrait/square poster JPG  -->
 <meta property="og:type"        content="website">
 <meta property="og:site_name"   content="SNS Financial Services">
-<meta property="og:title"       content="SNS Financial Services – Latest Bank Offers">
+<meta property="og:title"       content="SNS Financial Services - Latest Bank Offers">
 <meta property="og:description" content="Exclusive loan offers from our partner banks. Tap to view &amp; apply!">
 <meta property="og:url"         content="https://www.snsfinserv.in/sns_offers_viewer.html">
-
-<!-- IMPORTANT: og:image must be a publicly accessible URL.
-     For portrait WhatsApp preview, use a tall image (e.g. 1080x1920).
-     A square (1080x1080) also works well on WhatsApp.
-     Replace the URL below with your actual preview image URL.             -->
 <meta property="og:image"       content="https://www.snsfinserv.in/bank-offers/sns_preview_square.jpg">
 <meta property="og:image:width"  content="1080">
 <meta property="og:image:height" content="1080">
 <meta property="og:image:type"   content="image/jpeg">
-
-<!-- Twitter / iMessage fallback -->
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:image"       content="https://www.snsfinserv.in/bank-offers/sns_preview_square.jpg">
-
-<meta name="description" content="Exclusive loan &amp; insurance offers from our partner banks.">
-
-<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,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">
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAEBElEQVR4nO2ab0yUdRzAP3e7S46TC0XA8Z86BQnItbkaFrNZDWvumAUVWmtRa/Xet83WWjWWzRYtc9MXZLJKTUujv7ghKygdKQrx7xCEABGOPwfcncf1onF1C/b8VnLfF/4+r/g9/J7n++Hz7Lk9t2EqrnWFuIUxSwtIowNIC0ijA0gLSKMDSAtIowNIC0ijA0gLSKMDSAtIowNIC0ijA0gLSKMDSAtIowNIC0ijA0gLSGNR3bjSaqd03TaKUjaREZeK3RqLL+hnJjDLpH+KwekhBr3DHG47yvicJ+Lc+vJjmE1/tx72XmPn6VcIzAci9r1U+CwVG3aE11W/VPNVz3c3zeM/B8hypPPOltdYY1sdcdxmicFmiSHBtors2zMAqHP/aDg42Z5IqbOEzzq+VBm/bB6gEMBsMrGnaHd46IRvkqpfP+C3kUv4gj7S4lIoTruPUuejxK9wKP8xu/LKONXzPTM3ZpX2L5eHYYC8hJxwVYDDbUdpuPpzeN3t6aXb08uRtuNUFlQwH5pXGhy/wsGTuS4OtdYq7V8uD8MPwYy4tIj1UndsLuijuuUQPRNXlAYDlOe4lO/WcnkYBggRWbIi93Hy1+QqXXwxvIEZOsd7AIi12Hgmr0zpvJvtsYDhI9A+1hWxTlmZTPXWtxjyjtA62k7bWCctI610edzKQz+6+DFVxa8C4HKW8GnHSYa916LuAQoB3BN9nOlvZEv65ojja+1JrLUn8VBmMQB9UwMcvPgJ9f2NhkOb/zhPy0grG5PysZqtPJ//NG82vRd1D1B8EXqjaR/HOk8RDAWX3JMRl8qeot2Urd+uNHj/hZrwz49kPkiWI13EQymAP+hn3/kDPHHyBfae+5D6/kZGZ8cW3VtZsBOr2Wp4zcvXf6dhoOkvCZOJFwt3iXgovwkCjM2Nc6KrjhNddQA447Op2LCDrRkPhPfYLDFkOtKUnsUDF2rYnLIJs8nM/an30nLbpah7/K/vAl0eN6//tJfB6eGI4yaTSen8K5NX+aa3PrzemHhX1D0MA9yTXMjLdz+H3Rq76O9DhCKeyWAoyOD0kOHgBQ62HvnXd4Joehg+AhazhadyS3E5S/i29wxnB5vpHO9m2u8lwbaasvXbSY9LCe8/O9CMNzBjOHiBkZlRjneepjzHJeKh/Blgs8TgcpbgcpYsucc90ce75/arXjJMzeXPeeyOh5e8u8vpYfwidL2Dt5vfZ92qbO6MzyLRloDdGovdaifEPBO+KXo8vTQMNPG1+wcC8zeUBv+TSf8Ute1fUFlQEXUPk/4/wVscHUBaQBodQFpAGh1AWkAaHUBaQBodQFpAGh1AWkAaHUBaQBodQFpAGh1AWkAaHUBaQBodQFpAmj8BSAr6wxYKZycAAAAASUVORK5CYII=">
-<title>SNS – Bank Offers</title>
+<meta name="description"        content="Exclusive loan &amp; insurance offers from our partner banks.">
+<title>SNS - Bank Offers</title>
 <style>
-  * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
-
-  html, body {
-    width:100%; height:100%;
-    background:#fff;
-    font-family:'Segoe UI',Arial,sans-serif;
-    overflow:hidden;
-  }
-
-  /* ─── Slides ─────────────────────────────────── */
-  .slides-wrap {
-    position:fixed; inset:0;
-    overflow:hidden;
-  }
-  .slide {
-    position:absolute; inset:0;
-    display:flex; flex-direction:column;
-    background:#fff;
-    opacity:0;
-    transform:translateX(100%);
-    transition:transform 0.42s cubic-bezier(0.4,0,0.2,1),
-                opacity  0.42s cubic-bezier(0.4,0,0.2,1);
-    pointer-events:none;
-  }
-  .slide.active { opacity:1; transform:translateX(0);    pointer-events:auto; }
-  .slide.prev   { opacity:0; transform:translateX(-100%); }
-
-  /* ─── Top bar ────────────────────────────────── */
-  .brand-top {
-    flex-shrink:0;
-    background:#fff;
-    padding:6px 14px 5px;
-    display:flex; align-items:center; justify-content:space-between;
-    border-bottom:1px solid #e8eef5;
-    box-shadow:0 2px 6px rgba(0,0,60,0.06);
-    height:52px;
-  }
-  .brand-top img { height:30px; width:auto; }
-  .slide-counter { font-size:12px; font-weight:700; color:#8898aa; letter-spacing:1px; }
-  .slide-counter b { color:#1e5a1e; }
-
-  /* ─── Swoosh dividers ────────────────────────── */
-  .swoosh { flex-shrink:0; height:3px;
-    background:linear-gradient(90deg,#00003c 0%,#1e5a1e 55%,#00003c 100%); }
-
-  /* ─── Offer image ────────────────────────────── */
-  .offer-image-wrap {
-    flex:1; min-height:0;
-    display:flex; align-items:center; justify-content:center;
-    background:#fff; overflow:hidden;
-  }
-  .offer-image-wrap img {
-    width:100%; height:100%;
-    object-fit:contain; object-position:center;
-    display:block;
-  }
-
-  /* ─── Bottom band ────────────────────────────── */
-  .brand-bottom {
-    flex-shrink:0;
-    background:#00003c;
-    padding:8px 16px 10px;
-    text-align:center;
-  }
-  .brand-bottom .tagline {
-    font-size:9px; font-weight:800; letter-spacing:2px;
-    text-transform:uppercase; color:#4db84d; margin-bottom:3px;
-  }
-  .brand-bottom .contact {
-    font-size:11.5px; font-weight:600; color:rgba(255,255,255,0.82);
-    margin-bottom:6px;
-  }
-  .brand-bottom .contact a { color:#fff; text-decoration:none; }
-  .brand-bottom .apply-btn {
-    display:inline-block;
-    background:#1e5a1e; color:#fff;
-    font-size:14px; font-weight:800;
-    padding:9px 30px; border-radius:50px;
-    text-decoration:none; border:1.5px solid #4db84d;
-    box-shadow:0 3px 12px rgba(30,90,30,0.4);
-  }
-
-  /* ─── Dots ───────────────────────────────────── */
-  .dots-row {
-    display:flex; justify-content:center; gap:7px;
-    padding:7px 0 0;
-  }
-  .dot {
-    width:8px; height:8px; border-radius:50%;
-    background:rgba(255,255,255,0.25);
-    border:none; padding:0; cursor:pointer;
-    transition:background .25s, transform .25s;
-  }
-  .dot.active { background:#4db84d; transform:scale(1.5); }
-
-  /* ─── Nav arrows ─────────────────────────────── */
-  .nav-btn {
-    position:fixed; top:50%; transform:translateY(-50%);
-    z-index:30; width:42px; height:42px; border-radius:50%;
-    background:rgba(0,0,60,0.65);
-    border:2px solid rgba(77,184,77,0.5);
-    color:#fff; font-size:20px; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    backdrop-filter:blur(3px);
-    transition:background .2s, transform .2s;
-  }
-  .nav-btn:hover { background:#1e5a1e; transform:translateY(-50%) scale(1.1); }
-  .nav-btn:disabled { opacity:0.15; pointer-events:none; }
-  #btn-prev { left:8px; }
-  #btn-next { right:8px; }
-
-  /* ─── No offers ──────────────────────────────── */
-  .no-offers {
-    position:fixed; inset:0;
-    display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
-    background:#fff; color:#8898aa;
-    text-align:center; padding:40px; gap:14px;
-  }
-  .no-offers img { height:52px; margin-bottom:8px; }
-  .no-offers h2 { font-size:20px; color:#00003c; }
-  .no-offers p  { font-size:14px; line-height:1.7; }
-
-  /* ─── WhatsApp share button ──────────────────── */
-  .wa-share-btn {
-    position:fixed; bottom:20px; right:16px; z-index:40;
-    background:#25D366; color:#fff;
-    border:none; border-radius:50px;
-    padding:10px 18px 10px 14px;
-    font-size:14px; font-weight:700;
-    display:flex; align-items:center; gap:8px;
-    box-shadow:0 4px 14px rgba(37,211,102,0.45);
-    cursor:pointer; text-decoration:none;
-  }
-  .wa-share-btn svg { width:22px; height:22px; flex-shrink:0; }
+* { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; height:100%; background:#fff; font-family:'Segoe UI',Arial,sans-serif; overflow:hidden; }
+.slides-wrap { position:fixed; inset:0; overflow:hidden; }
+.slide { position:absolute; inset:0; display:flex; flex-direction:column; background:#fff; opacity:0; transform:translateX(100%); transition:transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.42s cubic-bezier(0.4,0,0.2,1); pointer-events:none; }
+.slide.active { opacity:1; transform:translateX(0); pointer-events:auto; }
+.slide.prev   { opacity:0; transform:translateX(-100%); }
+.brand-top { flex-shrink:0; background:#fff; padding:6px 14px 5px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #e8eef5; box-shadow:0 2px 6px rgba(0,0,60,0.06); height:52px; }
+.brand-top img { height:30px; width:auto; }
+.slide-counter { font-size:12px; font-weight:700; color:#8898aa; letter-spacing:1px; }
+.slide-counter b { color:#1e5a1e; }
+.swoosh { flex-shrink:0; height:3px; background:linear-gradient(90deg,#00003c 0%,#1e5a1e 55%,#00003c 100%); }
+.offer-image-wrap { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; background:#fff; overflow:hidden; }
+.offer-image-wrap img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; }
+.brand-bottom { flex-shrink:0; background:#00003c; padding:8px 16px 10px; text-align:center; }
+.brand-bottom .tagline { font-size:9px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#4db84d; margin-bottom:3px; }
+.brand-bottom .contact { font-size:11.5px; font-weight:600; color:rgba(255,255,255,0.82); margin-bottom:6px; }
+.brand-bottom .contact a { color:#fff; text-decoration:none; }
+.brand-bottom .apply-btn { display:inline-block; background:#1e5a1e; color:#fff; font-size:14px; font-weight:800; padding:9px 30px; border-radius:50px; text-decoration:none; border:1.5px solid #4db84d; box-shadow:0 3px 12px rgba(30,90,30,0.4); }
+.dots-row { display:flex; justify-content:center; gap:7px; padding:7px 0 0; }
+.dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); border:none; padding:0; cursor:pointer; transition:background .25s, transform .25s; }
+.dot.active { background:#4db84d; transform:scale(1.5); }
+.nav-btn { position:fixed; top:50%; transform:translateY(-50%); z-index:30; width:42px; height:42px; border-radius:50%; background:rgba(0,0,60,0.65); border:2px solid rgba(77,184,77,0.5); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px); transition:background .2s, transform .2s; }
+.nav-btn:hover { background:#1e5a1e; transform:translateY(-50%) scale(1.1); }
+.nav-btn:disabled { opacity:0.15; pointer-events:none; }
+#btn-prev { left:8px; }
+#btn-next { right:8px; }
+.no-offers { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; color:#8898aa; text-align:center; padding:40px; gap:14px; }
+.no-offers img { height:52px; margin-bottom:8px; }
+.no-offers h2 { font-size:20px; color:#00003c; }
+.no-offers p  { font-size:14px; line-height:1.7; }
+.wa-share-btn { position:fixed; bottom:20px; right:16px; z-index:40; background:#25D366; color:#fff; border:none; border-radius:50px; padding:10px 18px 10px 14px; font-size:14px; font-weight:700; display:flex; align-items:center; gap:8px; box-shadow:0 4px 14px rgba(37,211,102,0.45); cursor:pointer; text-decoration:none; }
+.wa-share-btn svg { width:22px; height:22px; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -175,7 +57,6 @@
 <button class="nav-btn" id="btn-prev" onclick="nav(-1)">&#8592;</button>
 <button class="nav-btn" id="btn-next" onclick="nav(1)">&#8594;</button>
 
-<!-- WhatsApp Share Button -->
 <a class="wa-share-btn" id="wa-share" href="#" target="_blank" rel="noopener">
   <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -184,9 +65,9 @@
 </a>
 
 <script>
-// ════════════════════════════════════════════════
+// ================================================
 //  UPDATE THIS LIST when offers change
-// ════════════════════════════════════════════════
+// ================================================
 var BANK_OFFERS = [
   "CIBIL.jpeg",
   "Idfc First Bank Offers.jpeg",
@@ -195,23 +76,18 @@ var BANK_OFFERS = [
   "Kotak Bank Offers.jpeg"
 ];
 
-var PAGE_URL = "https://www.snsfinserv.in/sns_offers_viewer.html";
-var PAGE_TITLE = "SNS Financial Services – Latest Bank Offers";
-var PAGE_TEXT = "Exclusive loan & insurance offers from our partner banks. Tap to view & apply! 🏦";
-
-var LOGO_ORIG  = "data:image/png;base64,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";
+var PAGE_URL    = "https://www.snsfinserv.in/sns_offers_viewer.html";
+var PAGE_TEXT   = "Exclusive loan & insurance offers from our partner banks. Tap to view & apply!";
 var ENQUIRY_URL = "index_new.html#enquiry";
 
-// ─── State ───────────────────────────────────────
+// SNS Logo (inline SVG - works without any external file)
+var LOGO_ORIG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgODAiPgogIDxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iODAiIGZpbGw9IiNmZmYiLz4KICA8cG9seWdvbiBwb2ludHM9IjUsMTIgMzUsNDAgNSw2OCAyMCw2OCA1MCw0MCAyMCwxMiIgZmlsbD0iIzFlNWExZSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMjgsMTIgNTgsNDAgMjgsNjggNDMsNjggNzMsNDAgNDMsMTIiIGZpbGw9IiM0ZGI4NGQiLz4KICA8dGV4dCB4PSI4NSIgeT0iNTIiIGZvbnQtZmFtaWx5PSJBcmlhbCBCbGFjayxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjM2IiBmaWxsPSIjMDAwMDNjIj5TTlM8L3RleHQ+CiAgPHJlY3QgeD0iMTc4IiB5PSIxNCIgd2lkdGg9IjIuNSIgaGVpZ2h0PSI1MiIgZmlsbD0iI2M4YTg0YiIvPgogIDx0ZXh0IHg9IjE4OCIgeT0iMzQiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNzAwIiBmb250LXNpemU9IjEzLjUiIGZpbGw9IiMwMDAwM2MiIGxldHRlci1zcGFjaW5nPSIxIj5GaW5hbmNpYWw8L3RleHQ+CiAgPHRleHQgeD0iMTg4IiB5PSI1NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtc2l6ZT0iMTMuNSIgZmlsbD0iIzFlNWExZSIgbGV0dGVyLXNwYWNpbmc9IjEiPlNlcnZpY2VzPC90ZXh0Pgo8L3N2Zz4=";
+
 var cur = 0, slides = [];
 
 function init() {
   var wrap = document.getElementById('slides-wrap');
-
-  // Set up WhatsApp share button
-  var waBtn = document.getElementById('wa-share');
-  var waText = encodeURIComponent(PAGE_TEXT + "\n" + PAGE_URL);
-  waBtn.href = "https://wa.me/?text=" + waText;
+  document.getElementById('wa-share').href = "https://wa.me/?text=" + encodeURIComponent(PAGE_TEXT + "\n" + PAGE_URL);
 
   if (!BANK_OFFERS || BANK_OFFERS.length === 0) {
     wrap.innerHTML =
@@ -235,8 +111,7 @@ function init() {
       '</div>' +
       '<div class="swoosh"></div>' +
       '<div class="offer-image-wrap">' +
-        '<img src="bank-offers/'+file+'" alt="Offer '+(i+1)+'" ' +
-             'onerror="this.style.display=\'none\'">' +
+        '<img src="bank-offers/'+file+'" alt="Offer '+(i+1)+'" onerror="this.style.display=\'none\'">' +
       '</div>' +
       '<div class="swoosh"></div>' +
       '<div class="brand-bottom">' +
@@ -246,20 +121,19 @@ function init() {
           ' &nbsp;|&nbsp; Alangudi, Pudukkottai' +
         '</div>' +
         '<a class="apply-btn" href="'+ENQUIRY_URL+'">Apply Now &#8594;</a>' +
-        (BANK_OFFERS.length>1?'<div class="dots-row" id="dr-'+i+'"></div>':'') +
+        (BANK_OFFERS.length>1 ? '<div class="dots-row" id="dr-'+i+'"></div>' : '') +
       '</div>';
     wrap.appendChild(s);
     slides.push(s);
   });
 
-  // Build dots inside every slide's dots-row
   if (BANK_OFFERS.length > 1) {
     for (var si=0; si<BANK_OFFERS.length; si++) {
       var bar = document.getElementById('dr-'+si);
       if (!bar) continue;
       for (var di=0; di<BANK_OFFERS.length; di++) {
         var d = document.createElement('button');
-        d.className = 'dot'+(di===0?' active':'');
+        d.className = 'dot' + (di===0?' active':'');
         d.onclick = (function(idx){ return function(){ goTo(idx); }; })(di);
         bar.appendChild(d);
       }
@@ -276,11 +150,8 @@ function goTo(idx) {
   cur = Math.max(0, Math.min(idx, slides.length-1));
   slides[cur].classList.remove('prev'); slides[cur].classList.add('active');
   setTimeout(function(){ p.classList.remove('prev'); }, 450);
-  // sync all dot rows
   document.querySelectorAll('.dots-row').forEach(function(bar) {
-    bar.querySelectorAll('.dot').forEach(function(d,i){
-      d.classList.toggle('active', i===cur);
-    });
+    bar.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('active', i===cur); });
   });
   updateNav();
 }
@@ -292,35 +163,15 @@ function updateNav() {
   document.getElementById('btn-next').disabled = (cur===slides.length-1);
 }
 
-// ─── Touch swipe ─────────────────────────────────
 function initSwipe() {
   var wrap=document.getElementById('slides-wrap'), sx=0, sy=0, t=0, locked=false;
-
-  wrap.addEventListener('touchstart',function(e){
-    sx=e.touches[0].clientX; sy=e.touches[0].clientY;
-    t=Date.now(); locked=false;
-  },{passive:true});
-
-  wrap.addEventListener('touchmove',function(e){
-    var dx=e.touches[0].clientX-sx, dy=e.touches[0].clientY-sy;
-    if(!locked && Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>10) locked=true;
-    if(locked) e.preventDefault();
-  },{passive:false});
-
-  wrap.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
-    var dt=Date.now()-t;
-    if(Math.abs(dx)>Math.abs(dy) && (Math.abs(dx)>35 || (dt<300 && Math.abs(dx)>15)))
-      nav(dx<0?1:-1);
-    locked=false;
-  },{passive:true});
+  wrap.addEventListener('touchstart',function(e){ sx=e.touches[0].clientX; sy=e.touches[0].clientY; t=Date.now(); locked=false; },{passive:true});
+  wrap.addEventListener('touchmove',function(e){ var dx=e.touches[0].clientX-sx, dy=e.touches[0].clientY-sy; if(!locked && Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>10) locked=true; if(locked) e.preventDefault(); },{passive:false});
+  wrap.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy; var dt=Date.now()-t; if(Math.abs(dx)>Math.abs(dy) && (Math.abs(dx)>35||(dt<300&&Math.abs(dx)>15))) nav(dx<0?1:-1); locked=false; },{passive:true});
 }
 
-document.addEventListener('DOMContentLoaded',init);
-document.addEventListener('keydown',function(e){
-  if(e.key==='ArrowRight') nav(1);
-  if(e.key==='ArrowLeft')  nav(-1);
-});
+document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('keydown', function(e){ if(e.key==='ArrowRight') nav(1); if(e.key==='ArrowLeft') nav(-1); });
 </script>
 </body>
 </html>
