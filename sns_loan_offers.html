@@ -106,11 +106,7 @@ body{
 .stat-item:nth-child(3){animation-delay:.3s}
 @keyframes stat-pop{0%{transform:scale(0.7);opacity:0}100%{transform:scale(1);opacity:1}}
 .stat-num{
-  font-size:15px;font-weight:900;
-  background:linear-gradient(135deg,#ffd700,#fff);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  text-shadow:none;
+  font-size:20px;line-height:1.2;
 }
 .stat-label{
   font-size:8px;font-weight:700;color:rgba(255,255,255,0.5);
@@ -501,13 +497,13 @@ wrap.appendChild(slideContainer);
 var statStrip = document.createElement('div');
 statStrip.className = 'stat-strip';
 statStrip.innerHTML =
-  '<div class="stat-item"><div class="stat-num">₹50L+</div><div class="stat-label">Max Loan</div></div>' +
+  '<div class="stat-item"><div class="stat-num">🏦</div><div class="stat-label">Top Banks</div></div>' +
   '<div class="stat-sep"></div>' +
-  '<div class="stat-item"><div class="stat-num">8.5%</div><div class="stat-label">Rate p.a.</div></div>' +
+  '<div class="stat-item"><div class="stat-num">⚡</div><div class="stat-label">Quick Process</div></div>' +
   '<div class="stat-sep"></div>' +
-  '<div class="stat-item"><div class="stat-num">24 Hrs</div><div class="stat-label">Approval</div></div>' +
+  '<div class="stat-item"><div class="stat-num">📄</div><div class="stat-label">Min. Docs</div></div>' +
   '<div class="stat-sep"></div>' +
-  '<div class="stat-item"><div class="stat-num">0 Fee</div><div class="stat-label">Processing</div></div>';
+  '<div class="stat-item"><div class="stat-num">🤝</div><div class="stat-label">Free Advice</div></div>';
 wrap.appendChild(statStrip);
 
 // CTA band
