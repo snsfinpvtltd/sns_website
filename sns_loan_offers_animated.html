@@ -125,6 +125,12 @@ button,a{font:inherit}
 .dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;margin-bottom:2px}
 .dot{width:7px;height:7px;border-radius:99px;border:0;background:rgba(255,255,255,.26);cursor:pointer;transition:width .25s ease,background .25s ease}
 .dot.active{width:26px;background:#ffd45a}
+.caption-bar{
+  flex:0 0 auto;padding:10px 16px 8px;text-align:center;
+  background:rgba(3,12,16,.92);border-top:1px solid rgba(255,215,0,.2)
+}
+.caption-bar h1{font-size:clamp(15px,4.5vw,21px);font-weight:900;line-height:1.15;color:#fff;transition:opacity .4s ease}
+.caption-bar p{margin-top:4px;font-size:12px;font-weight:600;color:rgba(255,255,255,.72);transition:opacity .4s ease}
 .nav{
   position:fixed;z-index:8;top:50%;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,212,90,.45);
   background:rgba(3,13,18,.55);color:#ffd45a;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px);
@@ -172,6 +178,10 @@ button,a{font:inherit}
   </header>
   <div class="shine"></div>
   <section class="stage" id="stage"></section>
+  <div class="caption-bar">
+    <h1 id="captionTitle"></h1>
+    <p id="captionSub"></p>
+  </div>
   <section class="info-strip" aria-label="Benefits">
     <div class="info-item"><strong>Top</strong><span>Banks</span></div>
     <div class="info-item"><strong>Fast</strong><span>Approval</span></div>
@@ -230,6 +240,8 @@ var totalNo = document.getElementById("totalNo");
 var tickerText = document.getElementById("tickerText");
 var shareLink = document.getElementById("shareLink");
 var applyLink = document.getElementById("applyLink");
+var captionTitle = document.getElementById("captionTitle");
+var captionSub = document.getElementById("captionSub");
 var slides = [];
 var dots = [];
 var current = 0;
@@ -246,7 +258,6 @@ OFFERS.forEach(function(offer,index){
       '<div class="blur" style="background-image:url(\'' + offer.file + '\')"></div>' +
       '<img src="' + offer.file + '" alt="' + offer.title + '" loading="' + (index === 0 ? "eager" : "lazy") + '">' +
       '<div class="tag">Limited Offer</div>' +
-      '<div class="caption"><h1>' + offer.title + '</h1><p>' + offer.sub + '</p></div>' +
     '</div>';
   stage.appendChild(slide);
   slides.push(slide);
@@ -285,6 +296,8 @@ document.getElementById("prevBtn").addEventListener("click",prevSlide);
 
 function updateLinks(){
   var offer = OFFERS[current];
+  captionTitle.textContent = offer.title;
+  captionSub.textContent = offer.sub;
   tickerText.textContent = offer.title + " - " + offer.sub + " - SNS Financial Services";
   var applyText = encodeURIComponent("Hi SNS Financial Services, I want to apply for: " + offer.title + ". Please share details.");
   var shareText = encodeURIComponent("Check this SNS Financial loan offer: " + offer.title + "\n" + offer.sub + "\n" + PAGE_URL);
